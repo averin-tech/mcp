@@ -14,7 +14,6 @@ from .request_models import GetExchangeRateRequest
 from .request_models import GetTimeSeriesEmaRequest
 from .request_models import GetStatisticsRequest
 from .request_models import GetProfileRequest
-from .request_models import GetMarketStateRequest
 from .request_models import GetSymbolSearchRequest
 from .request_models import GetEodRequest
 from .request_models import GetTimeSeriesSmaRequest
@@ -30,7 +29,6 @@ from .request_models import GetEarliestTimestampRequest
 from .request_models import GetEtfRequest
 from .request_models import GetCommoditiesRequest
 from .request_models import GetFundsRequest
-from .request_models import GetIpoCalendarRequest
 from .request_models import GetCryptocurrencyExchangesRequest
 from .request_models import GetTimeSeriesCrossRequest
 from .request_models import GetCrossListingsRequest
@@ -199,7 +197,6 @@ from .response_models import GetExchangeRate200Response
 from .response_models import GetTimeSeriesEma200Response
 from .response_models import GetStatistics200Response
 from .response_models import GetProfile200Response
-from .response_models import GetMarketState200Response
 from .response_models import GetSymbolSearch200Response
 from .response_models import GetEod200Response
 from .response_models import GetTimeSeriesSma200Response
@@ -215,7 +212,6 @@ from .response_models import GetEarliestTimestamp200Response
 from .response_models import GetEtf200Response
 from .response_models import GetCommodities200Response
 from .response_models import GetFunds200Response
-from .response_models import GetIpoCalendar200Response
 from .response_models import GetCryptocurrencyExchanges200Response
 from .response_models import GetTimeSeriesCross200Response
 from .response_models import GetCrossListings200Response
@@ -429,11 +425,6 @@ def register_all_tools(server: FastMCP, _call_endpoint):
     async def GetProfile(params: GetProfileRequest, ctx: Context) -> GetProfile200Response:
         return await _call_endpoint("profile", params, GetProfile200Response, ctx)
 
-    @server.tool(name="GetMarketState",
-                 description="Check the state of all available exchanges, time to open, and time to close. Returns all available stock exchanges by default.")
-    async def GetMarketState(params: GetMarketStateRequest, ctx: Context) -> GetMarketState200Response:
-        return await _call_endpoint("market_state", params, GetMarketState200Response, ctx)
-
     @server.tool(name="GetSymbolSearch",
                  description="This method helps to find the best matching symbol. It can be used as the base for custom lookups. The response is returned in descending order, with the most relevant instrument at the beginning.")
     async def GetSymbolSearch(params: GetSymbolSearchRequest, ctx: Context) -> GetSymbolSearch200Response:
@@ -508,11 +499,6 @@ def register_all_tools(server: FastMCP, _call_endpoint):
                  description="This API call returns an array of funds available at Twelve Data API. This list is updated daily.")
     async def GetFunds(params: GetFundsRequest, ctx: Context) -> GetFunds200Response:
         return await _call_endpoint("funds", params, GetFunds200Response, ctx)
-
-    @server.tool(name="GetIpoCalendar",
-                 description="This endpoint returns past, today, or upcoming IPOs.")
-    async def GetIpoCalendar(params: GetIpoCalendarRequest, ctx: Context) -> GetIpoCalendar200Response:
-        return await _call_endpoint("ipo_calendar", params, GetIpoCalendar200Response, ctx)
 
     @server.tool(name="GetCryptocurrencyExchanges",
                  description="This API call returns an array of cryptocurrency exchanges available at Twelve Data API. This list is updated daily.")
